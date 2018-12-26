@@ -14,6 +14,7 @@ let Store = new Redis().client
 
 // 注册
 router.post('/signup', async (ctx) => {
+  // ctx.set('Access-Control-Allow-Origin', '*')
   const {
     username,
     password,
@@ -119,6 +120,7 @@ router.post('/signin', async (ctx, next) => {
 
 // 验证码
 router.post('/verify', async (ctx, next) => {
+  // ctx.set('Access-Control-Allow-Origin', '*')
   let username = ctx.request.body.username
   const saveExpire = await Store.hget(`nodemail: ${username}`, 'expire')
   if (saveExpire && new Date().getTime() - saveExpire < 0) {

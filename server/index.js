@@ -1,6 +1,6 @@
 
 const Koa = require('koa')
-const cors = require('koa-cors') // 1、下载koa-cors, 即npm install koa-cors
+const cors = require('koa2-cors') // 1、下载koa2-cors, 即npm install koa2-cors
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
@@ -29,7 +29,14 @@ app.use(bodyParser({
   extendTypes: ['json', 'form', 'text']
 }))
 app.use(json())
-app.use(cors()) // 2、使用即可，即解决跨域的
+// 解决跨域
+app.use(cors({
+  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization', 'Date'],
+  maxAge: 100,
+  credentials: true,
+  allowMethods: ['GET', 'POST', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Custom-Header', 'anonymous']
+}))
 
 mongoose.connect(dbConfig.dbs, {
   useNewUrlParser: true

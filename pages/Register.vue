@@ -75,6 +75,7 @@
   </div>
 </template>
 <script>
+import CryptoJS from 'crypto-js'
 export default {
   name: 'Register',
   layout: 'Blank',
@@ -111,20 +112,6 @@ export default {
     }
   },
   methods: {
-    // old
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields();
-    },
     // 发送验证码
     sendMsg () {
       let namePass
@@ -167,7 +154,32 @@ export default {
     },
     // 注册按钮
     register () {
-      console.log(123456)
+      this.$refs['ruleForm'].validate((valid) => {
+        if (valid) { // 如果都ok的话，实则valid === true，代表全部验证通过了
+          this.$axios.post('/users/signup', {
+            username: window.encodeURIComponent(this.ruleForm.name),
+            password: CryptoJS.MD5(this.ruleForm.password).toString(),
+            email: this.ruleForm.email,
+            code: this.ruleForm.code
+          }).then((res) => {
+            console.log(res)
+            if (res.status === 200) {
+              if (res.data && res.data.code === 0) {
+                console.log('貌似成功了')
+                console.log(res)
+                // location.href = '/login'
+              } else {
+                this.error = res.data.msg
+              }
+            } else {
+              this.error = `服务器出错, 错误码:${res.status}`
+            }
+            setTimeout(() => {
+              this.error = ''
+            }, 2000)
+          })
+        }
+      })
     }
   }
 }
