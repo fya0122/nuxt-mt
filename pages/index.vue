@@ -23,6 +23,11 @@ export default {
     EMenu,
     Life,
     Artistic
+  },
+  created () {
+    this.$axios.get('/geo/getPosition').then((res) => {
+      // console.log(res)
+    })
   }
 }
 </script>
