@@ -19,6 +19,7 @@ passport.use(new LocalStrategy(async (username, password, done) => {
 }))
 // 序列化
 passport.serializeUser((user, done) => {
+  console.log(user)
   done(null, user)
 })
 // 反序列化

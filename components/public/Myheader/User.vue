@@ -17,9 +17,21 @@
 <script>
 export default {
   name: 'User',
-  data(){
+  data () {
     return {
       user: ''
+    }
+  },
+  mounted () {
+    this._getUserInfo()
+  },
+  methods: {
+    _getUserInfo () {
+      this.$axios.get('/users/getUser').then((res) => {
+        if (res.status === 200 && res.data.user) {
+          this.user = res.data.user
+        }
+      })
     }
   }
 }
