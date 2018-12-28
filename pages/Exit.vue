@@ -8,6 +8,8 @@ export default {
   middleware: async (ctx) => {
     const res = await ctx.$axios.get('/users/exit')
     if (res.status === 200 && res.data && res.data.code === 0) {
+      // console.log(this)
+      // this.$store.dispatch('setName', 'aaaa')
       location.href = '/'
     } else {
       console.log('退出失败')

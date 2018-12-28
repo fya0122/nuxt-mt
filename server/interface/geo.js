@@ -20,4 +20,18 @@ router.get('/getPosition', async (ctx) => {
   }
 })
 
+// 获取左侧菜单
+router.get('/menu', async (ctx) => {
+  const res = await axios.get(`http://cp-tools.cn/geo/menu?sign=${sign}`)
+  if (res.status === 200) {
+    ctx.body = {
+      menu: res.data.menu
+    }
+  } else {
+    ctx.body = {
+      menu: []
+    }
+  }
+})
+
 export default router
