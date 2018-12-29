@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 import axios from './utils/axios.js'
 import sign from './utils/sign.js'
+import Province from './../dbs/models/province.js'
 
 let router = new Router({ prefix: '/geo' })
 
@@ -30,6 +31,29 @@ router.get('/menu', async (ctx) => {
   } else {
     ctx.body = {
       menu: []
+    }
+  }
+})
+
+// 获取省份
+router.get('/province', async (ctx) => {
+  // let province = await Province.find()
+  // ctx.body = {
+  //   province: province.map(item => {
+  //     return {
+  //       id: item.id,
+  //       name: item.value[0]
+  //     }
+  //   })
+  // }
+  let res = await axios.get(`http://cp-tools.cn/geo/province?sign=${sign}`)
+  if (res.status === 200) {
+    ctx.body = {
+      province: res.data.province
+    }
+  } else {
+    ctx.body = {
+      province: []
     }
   }
 })

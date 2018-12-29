@@ -25,9 +25,8 @@ export default {
     Artistic
   },
   created () {
-    // this.$axios.get('/geo/getPosition').then((res) => {
-      // console.log(res)
-    // })
+    this.$axios.get('/search/top').then((res) => {
+    })
   }
 }
 </script>
