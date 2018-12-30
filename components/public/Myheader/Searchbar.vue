@@ -123,28 +123,27 @@ export default {
         return
       } else {
         let city = this.$store.getters.position.city.replace('市', '')
-        this.timer = setTimeout(() => {
-          this.$axios.get('/search/top', {
+        this.timer = setTimeout(async () => {
+          const res = await this.$axios.get('/search/top', {
             params: {
               input: this.search,
               city: city
             }
-          }).then((res) => {
-            if (res.status === 200 && res.statusText === 'OK' && res.data.top.code === 0) {
-              this.searchList = []
-              if (res.data.top.top.length) {
-                if (res.data.top.top.length > 10) {
-                  this.searchList = res.data.top.top.slice(0, 10)
-                } else {
-                  this.searchList = res.data.top.top
-                }
+          })
+          if (res.status === 200 && res.statusText === 'OK' && res.data.top.code === 0) {
+            this.searchList = []
+            if (res.data.top.top.length) {
+              if (res.data.top.top.length > 10) {
+                this.searchList = res.data.top.top.slice(0, 10)
               } else {
-                this.searchList = []
+                this.searchList = res.data.top.top
               }
             } else {
               this.searchList = []
             }
-          })
+          } else {
+            this.searchList = []
+          }
         }, 300)
       }
     }
