@@ -25,7 +25,7 @@ export default {
     Artistic
   },
   created () {
-    this.$axios.get('/search/top').then((res) => {
+    this.$axios.get('/search/hotPlace').then((res) => {
     })
   }
 }
