@@ -15,9 +15,13 @@ router.get('/top', async (ctx) => {
     }
   })
   if (res.status === 200) {
-    console.log(res.data)
+    ctx.body = {
+      top: res.data
+    }
   } else {
-    ctx.body = {}
+    ctx.body = {
+      top: []
+    }
   }
 })
 

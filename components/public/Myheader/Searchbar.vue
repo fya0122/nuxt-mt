@@ -30,7 +30,7 @@
             class="searchList">
             <dd
               v-for="(item, index) in searchList"
-              :key="index">{{ item }}</dd>
+              :key="index">{{ item.name }}</dd>
           </dl>
         </div>
         <p class="suggest">
@@ -82,6 +82,7 @@
   </div>
 </template>
 <script>
+// import _ from 'lodash' // 用你妈逼什么lodash，这么大的库，作死呢，直接uninstall 不解释
 export default {
   name: 'Searchbar',
   data () {
@@ -89,7 +90,8 @@ export default {
       search: '',
       isFocus: false,
       hotPlace: ['小笼包', '哈喽'],
-      searchList: ['开房', '避孕套']
+      searchList: [], // 搜索的结果
+      timer: null
     }
   },
   computed: {
@@ -109,8 +111,42 @@ export default {
         this.isFocus = false
       }, 200)
     },
-    input (e) {
-      console.log(e)
+    input () {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      if (!this.$store.getters.position.city) { // 没有城市的话
+        this.searchList = []
+        return
+      } else if (!this.search) { // 搜索框没值的话
+        this.searchList = []
+        return
+      } else {
+        let city = this.$store.getters.position.city.replace('市', '')
+        this.timer = setTimeout(() => {
+          this.$axios.get('/search/top', {
+            params: {
+              input: this.search,
+              city: city
+            }
+          }).then((res) => {
+            if (res.status === 200 && res.statusText === 'OK' && res.data.top.code === 0) {
+              this.searchList = []
+              if (res.data.top.top.length) {
+                if (res.data.top.top.length > 10) {
+                  this.searchList = res.data.top.top.slice(0, 10)
+                } else {
+                  this.searchList = res.data.top.top
+                }
+              } else {
+                this.searchList = []
+              }
+            } else {
+              this.searchList = []
+            }
+          })
+        }, 300)
+      }
     }
   }
 }
