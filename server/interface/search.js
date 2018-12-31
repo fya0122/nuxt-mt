@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import axios from './utils/axios.js'
 import Poi from './../dbs/models/poi.js'
 import sign from './utils/sign.js'
-import store from '../../store/index'
+import Vue from 'vue'
 
 let router = new Router({ prefix: '/search' })
 
@@ -28,8 +28,33 @@ router.get('/top', async (ctx) => {
 
 // 获取热门搜索呢
 router.get('/hotPlace', async (ctx) => {
-  ctx.body = {
-    code: store
+  let city = ''
+  const res = await axios.get(`http://cp-tools.cn/geo/getPosition?sign=${sign}`)
+  if (res.status === 200) {
+    city = res.data.city
+  } else {
+    city = ''
+  }
+  if (city || ctx.query.city) {
+    const res = await axios.get('http://cp-tools.cn/search/hotPlace', {
+      params: {
+        city: '北京',
+        sign: sign
+      }
+    })
+    if (res.status === 200) {
+      ctx.body = {
+        result: res.data.result
+      }
+    } else {
+      ctx.body = {
+        result: []
+      }
+    }
+  } else {
+    ctx.body = {
+      result: []
+    }
   }
 })
 
