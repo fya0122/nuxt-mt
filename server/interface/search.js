@@ -2,7 +2,6 @@ import Router from 'koa-router';
 import axios from './utils/axios.js'
 import Poi from './../dbs/models/poi.js'
 import sign from './utils/sign.js'
-import Vue from 'vue'
 
 let router = new Router({ prefix: '/search' })
 
@@ -42,6 +41,29 @@ router.get('/hotPlace', async (ctx) => {
   } else {
     ctx.body = {
       result: []
+    }
+  }
+})
+
+// 鬼晓得是个什么鬼
+router.get('/resultsByKeywords', async (ctx) => {
+  const { city, keyword } = ctx.query
+  const res = await axios.get('http://cp-tools.cn/search/resultsByKeywords', {
+    params: {
+      city: city,
+      keyword: keyword,
+      sign
+    }
+  })
+  if (res.status === 200) {
+    ctx.body = {
+      count: res.data.count,
+      pois: res.data.pois
+    }
+  } else {
+    ctx.body = {
+      count: 0,
+      pois: []
     }
   }
 })

@@ -165,7 +165,9 @@ export default {
           pos: '预约发票',
           price: '779'
         }]
-      }
+      },
+      city: '',
+      timer: null
     }
   },
   computed: {
@@ -173,12 +175,41 @@ export default {
       return this.list[this.kind]
     }
   },
+  created () {
+    if (this.$store.getters.position.city) {
+      this.city = this.$store.getters.position.city.replace('市', '')
+
+    }
+  },
   methods: {
     over (e) {
-      const dom = e.target // dom
-      const tag = dom.tagName.toLowerCase() // tag，比如dd
-      if (tag === 'dd') {
-        this.kind = dom.getAttribute('kind') // 默认是all
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      if (!this.city) {
+        return
+      } else {
+        this.timer = setTimeout(async () => {
+          const dom = e.target // dom
+          const tag = dom.tagName.toLowerCase() // tag，比如dd
+          if (tag === 'dd') {
+            this.kind = dom.getAttribute('kind') // 默认是all
+            let keyword = dom.getAttribute('keyword')
+            const res = await this.$axios.get('/search/resultsByKeywords', {
+              params: {
+                keyword: keyword,
+                city: this.city
+              }
+            })
+            if (res.status === 200 && res.data.count > 0) {
+              let result = []
+              result = res.data.pois.filter((item) => {
+                return item.photos.length > 0
+              })
+              console.log(result)
+            }
+          }
+        }, 300)
       }
     }
   }

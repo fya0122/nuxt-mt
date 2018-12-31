@@ -12,7 +12,7 @@
         <div class="wrapper">
           <el-input
             v-model="search"
-            placeholder="aaa"
+            :placeholder="hotPlace[0].name"
             @focus="focus"
             @blur="blur"
             @input="input"/>
@@ -23,7 +23,7 @@
             <dt>热门搜索</dt>
             <dd
               v-for="(item, index) in hotPlace"
-              :key="index">{{ item }}</dd>
+              :key="index">{{ item.name }}</dd>
           </dl>
           <dl
             v-if="isSearchList"
@@ -34,12 +34,10 @@
           </dl>
         </div>
         <p class="suggest">
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
+          <a
+            v-for="(item, index) in hotPlace"
+            :key="index"
+            href="#">{{ item.name }}</a>
         </p>
         <ul class="nav">
           <li>
@@ -89,7 +87,7 @@ export default {
     return {
       search: '',
       isFocus: false,
-      hotPlace: ['小笼包', '哈喽'],
+      hotPlace: [],
       searchList: [], // 搜索的结果
       timer: null
     }
@@ -101,6 +99,9 @@ export default {
     isSearchList () {
       return this.isFocus && this.search
     }
+  },
+  created () {
+    this.hotPlace = this.$store.getters.hotPlace.slice(0, 4) || []
   },
   methods: {
     focus () {
