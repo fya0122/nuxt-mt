@@ -1,14 +1,10 @@
 const home = {
   state: {
-    menu: [],
-    hotPlace: []
+    menu: []
   },
   mutations: {
     setMenu: (state, val) => {
       state.menu = val
-    },
-    setHotPlace: (state, val) => {
-      state.hotPlace = val
     }
   },
   actions: {

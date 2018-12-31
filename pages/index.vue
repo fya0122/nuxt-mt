@@ -23,10 +23,6 @@ export default {
     EMenu,
     Life,
     Artistic
-  },
-  created () {
-    this.$axios.get('/search/hotPlace').then((res) => {
-    })
   }
 }
 </script>

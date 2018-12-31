@@ -28,28 +28,16 @@ router.get('/top', async (ctx) => {
 
 // 获取热门搜索呢
 router.get('/hotPlace', async (ctx) => {
-  let city = ''
-  const res = await axios.get(`http://cp-tools.cn/geo/getPosition?sign=${sign}`)
+  let city = ctx.query.city || '北京'
+  const res = await axios.get('http://cp-tools.cn/search/hotPlace', {
+    params: {
+      city: city,
+      sign: sign
+    }
+  })
   if (res.status === 200) {
-    city = res.data.city
-  } else {
-    city = ''
-  }
-  if (city || ctx.query.city) {
-    const res = await axios.get('http://cp-tools.cn/search/hotPlace', {
-      params: {
-        city: '北京',
-        sign: sign
-      }
-    })
-    if (res.status === 200) {
-      ctx.body = {
-        result: res.data.result
-      }
-    } else {
-      ctx.body = {
-        result: []
-      }
+    ctx.body = {
+      result: res.data.result
     }
   } else {
     ctx.body = {
