@@ -16,6 +16,7 @@ const geo = {
       // 获取地理位置
       const res_pos = await app.$axios.get('/geo/getPosition')
       if (res_pos.status === 200) {
+        console.log(res_pos.data)
         commit('setPosition', res_pos.data)
       } else {
         commit('setPosition', {})

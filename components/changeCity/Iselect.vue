@@ -36,7 +36,9 @@ export default {
       province: [],
       cvalue: '',
       city: [],
-      input: '' // 远程搜索
+      input: '', // 远程搜索
+      timer: null,
+      citys: [] //全国的
     }
   },
   watch: {
@@ -68,8 +70,31 @@ export default {
     }
   },
   methods: {
-    querySearchAsync () {},
-    handleSelect () {}
+    querySearchAsync (query, cb) {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      this.timer = setTimeout(async () => {
+        if (this.citys.length) {
+          cb(this.citys.filter(item => item.value.indexOf(query) > -1))
+        } else {
+          const res = await this.$axios.get('/geo/city')
+          if (res.status === 200) {
+            this.citys = res.data.city.map((item) => {
+              return {
+                value: item.name
+              }
+            })
+            cb(this.citys.filter(item => item.value.indexOf(query) > -1))
+          } else {
+            cb([])
+          }
+        }
+      }, 300)
+    },
+    handleSelect () {
+      console.log('此处是点击跳转')
+    }
   }
 }
 </script>
