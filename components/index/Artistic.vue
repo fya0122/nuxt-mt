@@ -55,116 +55,11 @@ export default {
     return {
       kind: 'all',
       list: {
-        all: [{
-          img: '//p1.meituan.net/poi/bd5047c33720f043c04edfc98740d5c488064.jpg@368w_208h_1e_1c',
-          title: 'DQ（天坛路）',
-          pos: '森林幻想（小）1份',
-          price: '118'
-        }, {
-          img: '//p1.meituan.net/poi/bd5047c33720f043c04edfc98740d5c488064.jpg@368w_208h_1e_1c',
-          title: 'DQ（天坛路）',
-          pos: '森林幻想（小）1份',
-          price: '118'
-        }, {
-          img: '//p1.meituan.net/poi/bd5047c33720f043c04edfc98740d5c488064.jpg@368w_208h_1e_1c',
-          title: 'DQ（天坛路）',
-          pos: '森林幻想（小）1份',
-          price: '118'
-        }, {
-          img: '//p1.meituan.net/poi/bd5047c33720f043c04edfc98740d5c488064.jpg@368w_208h_1e_1c',
-          title: 'DQ（天坛路）',
-          pos: '森林幻想（小）1份',
-          price: '118'
-        }, {
-          img: '//p1.meituan.net/poi/bd5047c33720f043c04edfc98740d5c488064.jpg@368w_208h_1e_1c',
-          title: 'DQ（天坛路）',
-          pos: '森林幻想（小）1份',
-          price: '118'
-        }],
-        part: [{
-          img: '//p1.meituan.net/mogu/1da7b50a1772e4354929c90a7ce727cd35538.jpg@368w_208h_1e_1c',
-          title: '小丽都面包房（加州水郡店）',
-          pos: '蛋糕2选1,约10英寸，圆形',
-          price: '248'
-        }, {
-          img: '//p1.meituan.net/mogu/1da7b50a1772e4354929c90a7ce727cd35538.jpg@368w_208h_1e_1c',
-          title: '小丽都面包房（加州水郡店）',
-          pos: '蛋糕2选1,约10英寸，圆形',
-          price: '248'
-        }, {
-          img: '//p1.meituan.net/mogu/1da7b50a1772e4354929c90a7ce727cd35538.jpg@368w_208h_1e_1c',
-          title: '小丽都面包房（加州水郡店）',
-          pos: '蛋糕2选1,约10英寸，圆形',
-          price: '248'
-        }, {
-          img: '//p1.meituan.net/mogu/1da7b50a1772e4354929c90a7ce727cd35538.jpg@368w_208h_1e_1c',
-          title: '小丽都面包房（加州水郡店）',
-          pos: '蛋糕2选1,约10英寸，圆形',
-          price: '248'
-        }],
-        spa: [{
-          img: '//p0.meituan.net/merchantpic/23361032b03b77963a0d909589e049f8202913.jpg@240w_180h_1e_1c_1l|watermark=1&&r=2&p=9&x=2&y=2&relative=1&o=20|368w_208h_1e_1c',
-          title: '阿汤一族美发造型',
-          pos: '阿汤一族美发造型',
-          price: '76'
-        }, {
-          img: '//p0.meituan.net/merchantpic/23361032b03b77963a0d909589e049f8202913.jpg@240w_180h_1e_1c_1l|watermark=1&&r=2&p=9&x=2&y=2&relative=1&o=20|368w_208h_1e_1c',
-          title: '阿汤一族美发造型',
-          pos: '阿汤一族美发造型',
-          price: '76'
-        }, {
-          img: '//p0.meituan.net/merchantpic/23361032b03b77963a0d909589e049f8202913.jpg@240w_180h_1e_1c_1l|watermark=1&&r=2&p=9&x=2&y=2&relative=1&o=20|368w_208h_1e_1c',
-          title: '阿汤一族美发造型',
-          pos: '阿汤一族美发造型',
-          price: '76'
-        }, {
-          img: '//p0.meituan.net/merchantpic/23361032b03b77963a0d909589e049f8202913.jpg@240w_180h_1e_1c_1l|watermark=1&&r=2&p=9&x=2&y=2&relative=1&o=20|368w_208h_1e_1c',
-          title: '阿汤一族美发造型',
-          pos: '阿汤一族美发造型',
-          price: '76'
-        }],
-        movie: [{
-          img: '//p0.meituan.net/deal/201108/05/3_0805163047.jpg@368w_208h_1e_1c',
-          title: '耀莱成龙国际影城(五棵松店)',
-          pos: '免押金,儿童票,杜比全景声厅',
-          price: '19.9'
-        }, {
-          img: '//p0.meituan.net/deal/201108/05/3_0805163047.jpg@368w_208h_1e_1c',
-          title: '耀莱成龙国际影城(五棵松店)',
-          pos: '免押金,儿童票,杜比全景声厅',
-          price: '19.9'
-        }, {
-          img: '//p0.meituan.net/deal/201108/05/3_0805163047.jpg@368w_208h_1e_1c',
-          title: '耀莱成龙国际影城(五棵松店)',
-          pos: '免押金,儿童票,杜比全景声厅',
-          price: '19.9'
-        }, {
-          img: '//p0.meituan.net/deal/201108/05/3_0805163047.jpg@368w_208h_1e_1c',
-          title: '耀莱成龙国际影城(五棵松店)',
-          pos: '免押金,儿童票,杜比全景声厅',
-          price: '19.9'
-        }],
-        travel: [{
-          img: '//p1.meituan.net/tdchotel/3bc522be1b12f14143464d48ce51410e735348.png@368w_208h_1e_1c',
-          title: '北京天伦王朝酒店',
-          pos: '预约发票',
-          price: '779'
-        }, {
-          img: '//p1.meituan.net/tdchotel/3bc522be1b12f14143464d48ce51410e735348.png@368w_208h_1e_1c',
-          title: '北京天伦王朝酒店',
-          pos: '预约发票',
-          price: '779'
-        }, {
-          img: '//p1.meituan.net/tdchotel/3bc522be1b12f14143464d48ce51410e735348.png@368w_208h_1e_1c',
-          title: '北京天伦王朝酒店',
-          pos: '预约发票',
-          price: '779'
-        }, {
-          img: '//p1.meituan.net/tdchotel/3bc522be1b12f14143464d48ce51410e735348.png@368w_208h_1e_1c',
-          title: '北京天伦王朝酒店',
-          pos: '预约发票',
-          price: '779'
-        }]
+        all: [],
+        part: [],
+        spa: [],
+        movie: [],
+        travel: []
       },
       city: '',
       timer: null
@@ -175,10 +70,29 @@ export default {
       return this.list[this.kind]
     }
   },
-  created () {
+  async created () {
     if (this.$store.getters.position.city) {
       this.city = this.$store.getters.position.city.replace('市', '')
-
+    }
+    const res = await this.$axios.get('/search/resultsByKeywords', {
+      params: {
+        keyword: '景点',
+        city: this.city
+      }
+    })
+    if (res.status === 200 && res.data.count > 0) {
+      let r = res.data.pois.filter(item => item.photos.length).map((item) => {
+        return {
+          title: item.name,
+          pos: item.type.split(';')[0],
+          price: item.biz_ext.cost || '暂无',
+          img: item.photos[0].url,
+          url: 'http://www.baidu.com'
+        }
+      })
+      this.list['all'] = r.slice(0, 9)
+    } else {
+      this.list['all'] = []
     }
   },
   methods: {
@@ -201,12 +115,20 @@ export default {
                 city: this.city
               }
             })
+            console.log(res)
             if (res.status === 200 && res.data.count > 0) {
-              let result = []
-              result = res.data.pois.filter((item) => {
-                return item.photos.length > 0
+              let r = res.data.pois.filter(item => item.photos.length).map((item) => {
+                return {
+                  title: item.name,
+                  pos: item.type.split(';')[0],
+                  price: item.biz_ext.cost || '暂无',
+                  img: item.photos[0].url,
+                  url: 'http://www.baidu.com'
+                }
               })
-              console.log(result)
+              this.list[this.kind] = r.slice(0, 9)
+            } else {
+              this.list[this.kind] = []
             }
           }
         }, 300)
