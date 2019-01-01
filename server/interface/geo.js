@@ -58,4 +58,26 @@ router.get('/province', async (ctx) => {
   }
 })
 
+// 根据省id获取城市数据
+router.get('/province/:id', async (ctx) => {
+  // let city = await City.findOne({id: ctx.params.id})
+  //
+  // ctx.body = {
+  //   code: 0,
+  //   city: city.value.map(item => {
+  //     return {province: item.province, id: item.id, name: item.name}
+  //   })
+  // }
+  let res = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}?sign=${sign}`)
+  if (res.status === 200) {
+    ctx.body = {
+      city: res.data.city
+    }
+  } else {
+    ctx.body = {
+      city: []
+    }
+  }
+})
+
 export default router
