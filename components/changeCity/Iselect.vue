@@ -92,7 +92,8 @@ export default {
         }
       }, 300)
     },
-    handleSelect () {
+    handleSelect (item) {
+      console.log(item.value)
       console.log('此处是点击跳转')
     }
   }

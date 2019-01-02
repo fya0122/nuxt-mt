@@ -6,7 +6,9 @@
       </el-col>
     </el-row>
     <el-row :span="24">
-      <el-col>2</el-col>
+      <el-col>
+        <hot/>
+      </el-col>
     </el-row>
     <el-row :span="24">
       <el-col>3</el-col>
@@ -15,10 +17,12 @@
 </template>
 <script>
 import Iselect from './../components/changeCity/Iselect.vue'
+import Hot from './../components/changeCity/Hot.vue'
 export default {
   name: 'ChangeCity',
   components: {
-    Iselect
+    Iselect,
+    Hot
   }
 }
 </script>

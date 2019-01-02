@@ -111,4 +111,38 @@ router.get('/city', async (ctx) => {
   }
 })
 
+// 热门城市
+router.get('/hotCity', async (ctx) => {
+  // let list = [
+  //   '北京市',
+  //   '上海市',
+  //   '广州市',
+  //   '深圳市',
+  //   '天津市',
+  //   '西安市',
+  //   '杭州市',
+  //   '南京市',
+  //   '武汉市',
+  //   '成都市'
+  // ]
+  // let result = await City.find()
+  // let nList = []
+  // result.forEach(item => {
+  //   nList = nList.concat(item.value.filter(k => list.includes(k.name) || list.includes(k.province)))
+  // })
+  // ctx.body = {
+  //   hots: nList
+  // }
+  let res = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`)
+  if (res.status === 200) {
+    ctx.body = {
+      hots: res.data.hots
+    }
+  } else {
+    ctx.body = {
+      hots: []
+    }
+  }
+})
+
 export default router
