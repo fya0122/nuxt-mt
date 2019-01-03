@@ -32,24 +32,28 @@ export default {
   	}
   },
   async created () {
+    console.log(pyjs.getFullChars('北京市').toLocaleLowerCase().slice(0, 1))
     let blocks = []
     const res = await this.$axios.get('/geo/city')
     if (res.status === 200) {
-      console.log(res.data.city)
       let p
       let c
       let d = {}
       res.data.city.forEach(item => {
-        // 获取拼音的首字母
+        // 其实pyjs.getFullChars('北京市') === BeiJingShi
+        // 紧接着BeiJingShi.toLocaleLowerCase() === beijingshi
+        // 紧接着beijingshi.slice(0, 1) 那么此刻p便是"b"了
         p = pyjs.getFullChars(item.name).toLocaleLowerCase().slice(0, 1)
-        // 获取首字母的code值
+        // 此刻 "b".charCodeAt(0) === 98
+        // 字母"a".charCodeAt(0) === 97 z.charCodeAt(0) === 122 所以a~z 即>96和<123
         c = p.charCodeAt(0)
-        // 小写的a到z的code值
-        if (!d[p]) {
-          d[p] = []
+        if (c > 96 && c < 123) {
+          if (!d[p]) {
+            d[p] = []
+          }
+          // 生成map
+          d[p].push(item.name)
         }
-        // 生成map
-        d[p].push(item.name)
       })
       for (let [k, v] of Object.entries(d)) {
         blocks.push({
