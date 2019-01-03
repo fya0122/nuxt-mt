@@ -16,28 +16,34 @@
             @focus="focus"
             @blur="blur"
             @input="input"/>
-          <button class="el-button el-button--primary"><i class="el-icon-search"/></button>
+          <button
+            class="el-button el-button--primary"
+            @click="searchProduct"><i class="el-icon-search"/></button>
           <dl
             v-if="isHotPlace"
             class="hotPlace">
             <dt>热门搜索</dt>
             <dd
               v-for="(item, index) in hotPlace"
-              :key="index">{{ item.name }}</dd>
+              :key="index">
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
+            </dd>
           </dl>
           <dl
             v-if="isSearchList"
             class="searchList">
             <dd
               v-for="(item, index) in searchList"
-              :key="index">{{ item.name }}</dd>
+              :key="index">
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
+            </dd>
           </dl>
         </div>
         <p class="suggest">
           <a
             v-for="(item, index) in hotPlace"
             :key="index"
-            href="#">{{ item.name }}</a>
+            :href="'/products?keyword='+encodeURIComponent(item.name)">{{ item.name }}</a>
         </p>
         <ul class="nav">
           <li>
@@ -85,7 +91,7 @@ export default {
   name: 'Searchbar',
   data () {
     return {
-      search: '',
+      search: '', // input的值
       isFocus: false,
       hotPlace: [],
       searchList: [], // 搜索的结果
@@ -147,6 +153,13 @@ export default {
           }
         }, 300)
       }
+    },
+    // 点击button按钮
+    searchProduct () {
+      if (!this.search) {
+        return
+      }
+      window.location.href = `/products?keyword=${encodeURIComponent(this.search)}`
     }
   }
 }

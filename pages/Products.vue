@@ -26,8 +26,26 @@ export default {
       list: [],
       types: [],
       areas: [],
-      keyword: '你好啊'
+      keyword: ''
     }
+  },
+  // 下面是ssr，直接在vue文件中写了，懒得去vuex写了
+  async asyncData (ctx) {
+    let keyword = ctx.query.keyword
+    return {
+      keyword: keyword
+    }
+    // let city = ctx.store.getters.position.city
+    // const res_keyword = await ctx.$axios.get('/search/resultsByKeywords', {
+    //   params: {
+    //     keyword: keyword,
+    //     city: city
+    //   }
+    // })
+    // if (res_keyword.status === 200) {
+    //   return {
+    //   }
+    // }
   }
 }
 </script>
