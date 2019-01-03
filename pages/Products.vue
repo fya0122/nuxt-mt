@@ -1,14 +1,16 @@
 <template>
-  <el-row class="page-product">
-    <el-col :span="19">
-      <crumbs :keyword="keyword"/>
-      <categroy
-        :types="types"
-        :areas="areas"/>
-      <list :list="list"/>
-    </el-col>
-    <el-col :span="5">地图</el-col>
-  </el-row>
+  <div class="page-product">
+    <el-row class="page-product">
+      <el-col :span="19">
+        <crumbs :keyword="keyword"/>
+        <categroy
+          :types="types"
+          :areas="areas"/>
+        <list :list="list"/>
+      </el-col>
+      <el-col :span="5">地图</el-col>
+    </el-row>
+  </div>
 </template>
 <script>
 import Crumbs from '~/components/products/Crumbs.vue'
@@ -23,19 +25,24 @@ export default {
   },
   data () {
     return {
-      list: [],
+      keyword: '',
       types: [],
       areas: [],
-      keyword: ''
+      list: []      
     }
   },
   // 下面是ssr，直接在vue文件中写了，懒得去vuex写了
   async asyncData (ctx) {
     let keyword = ctx.query.keyword
+    let city = ctx.store.getters.position.city
+    const res_types_and_areas = ctx.$axios.get('/categroy/crumbs', {
+      params: {
+        city: city
+      }
+    })
     return {
       keyword: keyword
     }
-    // let city = ctx.store.getters.position.city
     // const res_keyword = await ctx.$axios.get('/search/resultsByKeywords', {
     //   params: {
     //     keyword: keyword,
