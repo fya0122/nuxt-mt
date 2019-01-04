@@ -55,6 +55,8 @@ export default {
       }
     })
     if (res_list.status === 200 && res_list.data.count > 0) {
+      console.log('>>>res_list.data.pois<<<')
+      console.log(res_list.data.pois)
       return {
         keyword: keyword,
         areas: new_areas,
@@ -71,7 +73,9 @@ export default {
             tel: item.tel,
             status: '可订明日',
             location: item.location,
-            module: item.type.split(';')[0]
+            module: item.type.split(';')[0],
+            address: item.address,
+            adname: item.adname
           }
         })
       }
