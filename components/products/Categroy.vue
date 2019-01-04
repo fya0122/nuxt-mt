@@ -7,7 +7,7 @@
         v-for="(item, index) in types"
         :key="index">
         <iselect
-          :name="item.name"
+          :name="item.type"
           :list="item.module"/>
       </dd>
     </dl>
@@ -18,7 +18,7 @@
         v-for="(item, index) in areas"
         :key="index">
         <iselect
-          :name="item.name"
+          :name="item.type"
           :list="item.module"/>
       </dd>
     </dl>

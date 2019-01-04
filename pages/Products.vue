@@ -26,8 +26,8 @@ export default {
   data () {
     return {
       keyword: '',
-      types: [],
       areas: [],
+      types: [],
       list: []      
     }
   },
@@ -35,24 +35,47 @@ export default {
   async asyncData (ctx) {
     let keyword = ctx.query.keyword
     let city = ctx.store.getters.position.city
-    const res_types_and_areas = ctx.$axios.get('/categroy/crumbs', {
+    // 1
+    const res_categroy = await ctx.$axios.get('/categroy/crumbs', {
       params: {
         city: city
       }
     })
-    return {
-      keyword: keyword
+    let new_areas = []
+    let new_types = []
+    if (res_categroy.status === 200) {
+      new_areas = res_categroy.data.areas.filter(item => item.type !== '').slice(0, 5)
+      new_types = res_categroy.data.types.filter(item => item.type !== '').slice(0, 5)
     }
-    // const res_keyword = await ctx.$axios.get('/search/resultsByKeywords', {
-    //   params: {
-    //     keyword: keyword,
-    //     city: city
-    //   }
-    // })
-    // if (res_keyword.status === 200) {
-    //   return {
-    //   }
-    // }
+    // 2
+    const res_list = await ctx.$axios.get('/search/resultsByKeywords', {
+      params: {
+        keyword: keyword,
+        city: city
+      }
+    })
+    if (res_list.status === 200 && res_list.data.count > 0) {
+      return {
+        keyword: keyword,
+        areas: new_areas,
+        types: new_types,
+        list: res_list.data.pois.filter(item => item.photos.length).map((item) => {
+          return {
+            type: item.type,
+            img: item.photos[0].url,
+            name: item.name,
+            comment: Math.floor(Math.random() * 10000),
+            rate: Number(item.biz_ext.rating),
+            price: Number(item.biz_ext.cost),
+            scene: item.tag,
+            tel: item.tel,
+            status: '可订明日',
+            location: item.location,
+            module: item.type.split(';')[0]
+          }
+        })
+      }
+    }
   }
 }
 </script>
