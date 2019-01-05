@@ -38,6 +38,7 @@ export default {
   },
   // 需要拿到window对象，只能在挂载后执行
   mounted () {
+    // 1、先声明id
     this.id = `map${Math.random().toString().slice(4, 6)}`
 
     window.onmaploaded = () => {
@@ -52,12 +53,14 @@ export default {
         map.addControl(toolbar)
         let marker = new window.AMap.Marker({
           icon: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+          // icon: 'https://s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/location_red.png',
           position: this.point
         })
         this.marker = marker
         marker.setMap(map)
       })
     }
+    // 2、找到key，并且打开callback
     const url = `https://webapi.amap.com/maps?v=1.4.10&key=${this.key}&callback=onmaploaded`
     let jsapi = document.createElement('script')
     jsapi.charset = 'utf-8'
