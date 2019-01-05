@@ -8,7 +8,13 @@
           :areas="areas"/>
         <list :list="list"/>
       </el-col>
-      <el-col :span="5">地图</el-col>
+      <el-col :span="5">
+        <a-map
+          v-if="point.length"
+          :width="230"
+          :height="290"
+          :point="point"/>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -16,19 +22,22 @@
 import Crumbs from '~/components/products/Crumbs.vue'
 import Categroy from '~/components/products/Categroy.vue'
 import List from '~/components/products/List.vue'
+import AMap from '~/components/public/Map.vue'
 export default {
   name: 'Products',
   components: {
     Crumbs,
     Categroy,
-    List
+    List,
+    AMap
   },
   data () {
     return {
       keyword: '',
       areas: [],
       types: [],
-      list: []      
+      list: [],
+      point: []
     }
   },
   // 下面是ssr，直接在vue文件中写了，懒得去vuex写了
@@ -61,6 +70,7 @@ export default {
         keyword: keyword,
         areas: new_areas,
         types: new_types,
+        point: (res_list.data.pois.find(item => item.location).location || '').split(','),
         list: res_list.data.pois.filter(item => item.photos.length).map((item) => {
           return {
             type: item.type,

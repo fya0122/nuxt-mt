@@ -115,7 +115,6 @@ export default {
                 city: this.city
               }
             })
-            console.log(res)
             if (res.status === 200 && res.data.count > 0) {
               let r = res.data.pois.filter(item => item.photos.length).map((item) => {
                 return {
