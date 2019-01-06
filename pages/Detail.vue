@@ -17,9 +17,24 @@
         <h3>商家团购及优惠</h3>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row v-if="canOrder || !login">
       <el-col :span="24">
-        <list :list="list"/>
+        <list
+          v-if="login"
+          :list="list"/>
+        <div
+          v-else
+          class="deal-need-login">
+          <img
+            src="//p0.meituan.net/codeman/56a7d5abcb5ce3d90fc91195e5b5856911194.png"
+            alt="登录查看">
+          <span>请登录后查看详细团购优惠</span>
+          <el-button
+            type="primary"
+            round>
+            <a href="/login">立即登录</a>
+          </el-button>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -40,7 +55,13 @@ export default {
       keyword: '',
       type: '',
       product: {},
-      list: []
+      list: [],
+      login: false
+    }
+  },
+  computed: {
+    canOrder () {
+      return this.list.filter(item => item.photos.length).length
     }
   },
   async asyncData (ctx) {

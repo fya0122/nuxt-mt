@@ -10,14 +10,14 @@
       </dd>
       <dd>
         <h4>{{ obj.name }}</h4>
-        <p>
+        <div>
           <span v-if="obj.biz_ext && obj.biz_ext.ticket_ordering">剩余：{{ Number(obj.biz_ext.ticket_ordering) }}</span>
           <span v-if="obj.deadline">截止日期：{{ obj.deadline }}</span>
-        </p>
-        <p>
+        </div>
+        <div>
           <span class="price">{{ Number(obj.biz_ext.cost) }}</span>
           <span>门店价{{ Number(obj.biz_ext.cost) }}</span>
-        </p>
+        </div>
       </dd>
       <dd>
         <el-button
