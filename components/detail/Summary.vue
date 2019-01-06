@@ -47,9 +47,6 @@ export default {
       return Number(this.product.biz_ext.rating) || Math.floor(Math.random() * 5)
     }
   },
-  created () {
-    console.log(this.product)
-  },
   methods: {
     openMap () {
       console.log('abc')
