@@ -20,7 +20,7 @@
 <script>
 import Product from './Product.vue'
 export default {
-  name: 'List',
+  name: 'ListProducts',
   components: {
     Product
   },

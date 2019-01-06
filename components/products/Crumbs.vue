@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: 'Crumbs',
+  name: 'CrumbsProducts',
   props: {
     keyword: {
       type: String,
