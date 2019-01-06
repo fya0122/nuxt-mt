@@ -7,7 +7,7 @@
           :type="type"/>
       </el-col>
     </el-row>
-    <el-row>
+    <!-- <el-row>
       <el-col :span="24">
         <summa :product="product"/>
       </el-col>
@@ -21,7 +21,7 @@
       <el-col :span="24">
         <list :list="list"/>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 <script>
@@ -41,6 +41,34 @@ export default {
       type: '',
       product: {},
       list: []
+    }
+  },
+  async asyncData (ctx) {
+    let { keyword, type } = ctx.query
+    const city = ctx.store.getters.position.city
+    const res = await ctx.$axios.get('/search/products', {
+      params: {
+        keyword: keyword,
+        type: type,
+        city: city
+      }
+    })
+    if (res.status === 200) {
+      return {
+        keyword,
+        type,
+        login: res.data.login,
+        product: res.data.product,
+        list: res.data.more
+      }
+    } else {
+      return {
+        keyword,
+        type,
+        login: false,
+        product: {},
+        list: []
+      }
     }
   }
 }

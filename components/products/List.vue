@@ -55,10 +55,6 @@ export default {
       ]
     }
   },
-  mounted () {
-    console.log('>>> list >>> mounted')
-    console.log(this.list)
-  },
   methods: {
     navSelect () {
       console.log('this is navSelect')
