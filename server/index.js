@@ -15,6 +15,7 @@ import users from './interface/users.js'
 import geo from './interface/geo.js'
 import search from './interface/search.js'
 import categroy from './interface/categroy.js'
+import cart from './interface/cart.js'
 
 const app = new Koa()
 const host = process.env.HOST || '127.0.0.1'
@@ -69,6 +70,7 @@ async function start() {
   app.use(geo.routes()).use(geo.allowedMethods())
   app.use(search.routes()).use(search.allowedMethods())
   app.use(categroy.routes()).use(categroy.allowedMethods())
+  app.use(cart.routes()).use(cart.allowedMethods())
   app.use(ctx => {
     ctx.status = 200 // koa defaults to 404 when it sees that status is unset
 

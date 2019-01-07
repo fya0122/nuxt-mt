@@ -41,8 +41,24 @@ export default {
     }
   },
   methods: {
-    createCart () {
-      console.log(123)
+    async createCart () {
+      const res = await this.$axios.post('/cart/create', {
+        params: {
+          id: Math.random().toString().slice(3, 9),
+          detail: {
+            name: this.obj.name,
+            price: this.obj.biz_ext.cost,
+            imgs: this.obj.photos
+          }
+        }
+      })
+      if (res.status === 200) {
+        console.log(res.data)
+        alert('已经加入购物车成功了')
+        window.location.href = `/cart/?id=${res.data.id}`
+      } else {
+        console.log('error.')
+      }
     }
   }
 }
