@@ -2,9 +2,10 @@
   <div class="page-cart">
     <el-row>
       <el-col
+        v-if="cart.length"
         :span="24"
         class="m-cart">
-        <list/>
+        <list :cartdata="cart"/>
         <p>应付金额： <em class="money">￥{{ total }}</em></p>
         <div class="post">
           <el-button
@@ -25,11 +26,11 @@ export default {
   components: {
     list
   },
-  data () {
-    return {
-      cart: []
-    }
-  },
+  // data () {
+  //   return {
+  //     cart: []
+  //   }
+  // },
   computed: {
     total () {
       let total = 0
@@ -37,6 +38,22 @@ export default {
         total += item.price * item.count
       })
       return total
+    }
+  },
+  // ssr
+  async asyncData (ctx) {
+    const res = await ctx.$axios.post('/cart/getCart', {
+      id: ctx.query.id
+    })
+    if (res.status === 200 && res.data.code === 0 && res.data.data.name) {
+      return {
+        cart: [{
+          name: res.data.data.name,
+          price: res.data.data.price,
+          count: 1
+        }],
+        cartNo: ctx.query.id
+      }
     }
   },
   methods: {
@@ -48,4 +65,7 @@ export default {
 </script>
 <style lang="scss">
 @import "~/assets/css/cart/index.scss";
+.el-table /deep/ .el-table_1_column_3 {
+  text-align: center;
+}
 </style>

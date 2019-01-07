@@ -1,7 +1,7 @@
 <template>
   <el-table
-    :data="tableData"
-    style="width: 980px">
+    :data="cartdata"
+    style="width: auto">
     <el-table-column
       prop="name"
       label="项目"
@@ -48,6 +48,9 @@ export default {
         count: 10
       }]
     }
+  },
+  created () {
+    console.log(this.cartdata)
   }
 }
 </script>
