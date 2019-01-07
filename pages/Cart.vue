@@ -14,6 +14,7 @@
         </div>
       </el-col>
       <el-col
+        v-else
         :span="24"
         class="empty">购物车为空</el-col>
     </el-row>
@@ -26,11 +27,11 @@ export default {
   components: {
     list
   },
-  // data () {
-  //   return {
-  //     cart: []
-  //   }
-  // },
+  data () {
+    return {
+      orderid: ''
+    }
+  },
   computed: {
     total () {
       let total = 0
@@ -57,8 +58,18 @@ export default {
     }
   },
   methods: {
-    submit () {
-      console.log(123)
+    async submit () {
+      const res = await this.$axios.post('/order/createorder', {
+        id: this.cartNo,
+        price: this.cart[0].price,
+        count: this.cart[0].count
+      })
+      if (res.status === 200 && res.data.id) {
+        alert('生成订单成功!')
+        window.location.href = '/order'
+      } else {
+        alert('系统错误!')
+      }
     }
   }
 }
